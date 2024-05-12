@@ -1,4 +1,4 @@
-# th ecode below checks if a certain variable exists in the datasets.
+# code below checks if a certain variable exists in the datasets.
 
 library(haven)
 
