@@ -1,0 +1,22 @@
+# th ecode below checks if a certain variable exists in the datasets.
+
+library(haven)
+
+folder_path <- "~/filepath"
+
+dta_file_names <- list.files(path = folder_path, pattern = "\\.dta$", full.names = TRUE)
+
+if (length(dta_file_names) > 0) {
+  contains_vars <- function(file_path) {
+    data <- read_dta(file_path)
+    return(!(("var1" %in% names(data)) && ("var2" %in% names(data))))
+  }
+  
+  filtered_dta_file_names <- dta_file_names[sapply(dta_file_names, contains_vars)]
+  
+  file_names <- tools::file_path_sans_ext(basename(filtered_dta_file_names))
+  
+  print(file_names)
+} else {
+  cat("No .dta files found in the specified folder.\n")
+}
